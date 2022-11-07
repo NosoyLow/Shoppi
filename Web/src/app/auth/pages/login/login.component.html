@@ -1,1 +1,44 @@
-<p>login works!</p>
+<form  (ngSubmit)="saveForm()" [formGroup]="loginForm" class="form-container">
+    <mat-card>
+
+
+        <mat-card-header>
+            <mat-card-title>Inicia sesión!</mat-card-title>
+        </mat-card-header>
+        
+        <mat-card-content>
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre de usuario</mat-label>
+                <input formControlName="username" matInput>
+            </mat-form-field>
+            <div>
+                <span class="form-text text-danger" *ngIf="noUserValid()">
+                    Nombre de usuario inválido
+                </span>
+            </div>
+            <br>
+
+            <div>
+                <mat-form-field appearance="fill">
+                  <mat-label>Contraseña</mat-label>
+                  <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+                  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </button>
+                </mat-form-field>
+                <div>
+                    <span class="form-text text-danger" *ngIf="noPasswordValid()">
+                        Contraseña inválida
+                    </span>
+                </div>
+            </div>
+            <br>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-raised-button color="primary">Acceder</button>
+        </mat-card-actions>
+
+
+    </mat-card>
+</form>
