@@ -9,9 +9,6 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 
-
-
-
 @NgModule({
   declarations: [
     MainComponent,

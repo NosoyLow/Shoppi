@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms'
+import { LoginService } from '../../services/login.service';
+
+
 
 @Component({
   selector: 'app-login',
@@ -10,7 +13,7 @@ import { FormBuilder, Validators } from '@angular/forms'
 export class LoginComponent {
   hide = true;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private logService: LoginService) {}
 
   loginForm = this.formBuilder.group({
     username:[
@@ -41,8 +44,11 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched()
       return;
     }
+
     console.log('Data:', this.loginForm.value);
     
+    this.logService.doLogin(this.loginForm.value)
+
   }
 
 }
