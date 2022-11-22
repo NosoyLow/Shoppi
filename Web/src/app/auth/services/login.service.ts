@@ -9,11 +9,10 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   doLogin(loginForm: any){
-    this.http.post("localhost:80/api/login", {'email':'furdalispo@gufum.com', 'password':'jefFG32"eaf'}).subscribe( resp => console.log(resp))
+    this.http.post("http://localhost:80/api/login", {'email':'furdalispo@guff8um.com', 'password':'jefFG32"eaf'}).subscribe( resp => console.log(resp))
     //console.log("")
 
   }
 
-
-
+  
 }

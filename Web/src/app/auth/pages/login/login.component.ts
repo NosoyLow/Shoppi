@@ -19,9 +19,10 @@ export class LoginComponent {
     username:[
       '', 
       [
-        Validators.required,
-        Validators.pattern("^[A-Za-z0-9_-]{5,20}$")] 
-      ],
+        Validators.required
+        //Validators.pattern("^{1,30}$")
+      ] 
+    ],
     password:[
       '',
       [
