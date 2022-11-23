@@ -16,7 +16,7 @@ export class LoginComponent {
   constructor(private formBuilder: FormBuilder, private logService: LoginService) {}
 
   loginForm = this.formBuilder.group({
-    username:[
+    email:[
       '', 
       [
         Validators.required
@@ -33,7 +33,7 @@ export class LoginComponent {
   })
 
   noUserValid(){
-    return this.loginForm.controls.username.errors && this.loginForm.controls.username.touched
+    return this.loginForm.controls.email.errors && this.loginForm.controls.email.touched
   }
 
   noPasswordValid(){

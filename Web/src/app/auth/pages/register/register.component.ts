@@ -20,7 +20,7 @@ export class RegisterComponent {
       '', 
       [
         Validators.required,
-        Validators.pattern("^[A-Za-z0-9_-]{5,20}$")
+        Validators.pattern(/^[a-zA-Z0-9]{3,20}$/)
       ] 
     ],
     name:[
@@ -48,14 +48,14 @@ export class RegisterComponent {
       '', 
       [
         Validators.required,
-        Validators.pattern("^[a-zA-Z0-9._-]+@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+){1,2}$")
+        Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+){1,2}$/)
       ]
     ],
     password:[
       '',
       [
         Validators.required,
-        Validators.pattern('^[A-Za-z0-9_@./#&+-].{8,30}$')
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{8,16}$/)
        ]
     ]
   })

@@ -8,12 +8,12 @@
         
         <mat-card-content>
             <mat-form-field appearance="fill">
-                <mat-label>Nombre de usuario</mat-label>
-                <input formControlName="username" matInput>
+                <mat-label>Correo electrónico</mat-label> 
+                <input formControlName="email" matInput>
             </mat-form-field>
             <div>
                 <span class="form-text text-danger" *ngIf="noUserValid()">
-                    Nombre de usuario inválido
+                    Correo electrónico inválido
                 </span>
             </div>
             <br>
