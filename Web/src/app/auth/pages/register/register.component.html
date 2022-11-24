@@ -1,5 +1,5 @@
-<form  (ngSubmit)="saveForm()" [formGroup]="loginForm" class="form-container">
-    <mat-card class="center">
+<form  (ngSubmit)="saveForm()" [formGroup]="registerForm" class="form-container">
+    <mat-card>
 
 
         <mat-card-header>
@@ -71,11 +71,6 @@
                 <mat-error *ngIf="noEmailValid()">Correo electrónico no válido</mat-error>
             </div>
             <br>
-
-            <!-- <mat-label for="avatar">Elige una foto de perfil:</mat-label>
-            <br>
-            <input formControlName="image" type="file" name="avatar" accept="image/png, image/jpeg"> -->
-
 
         </mat-card-content>
 

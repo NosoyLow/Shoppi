@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms'
-import { LoginService } from '../../services/login.service';
-
-
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +11,14 @@ import { LoginService } from '../../services/login.service';
 export class LoginComponent {
   hide = true;
 
-  constructor(private formBuilder: FormBuilder, private logService: LoginService) {}
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) {}
 
   loginForm = this.formBuilder.group({
     email:[
       '', 
       [
-        Validators.required
-        //Validators.pattern("^{1,30}$")
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+){1,2}$/)
       ] 
     ],
     password:[
@@ -48,8 +46,7 @@ export class LoginComponent {
 
     console.log('Data:', this.loginForm.value);
     
-    this.logService.doLogin(this.loginForm.value)
-
+    this.authService.doLoginTEST(this.loginForm.value)
   }
 
 }

@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MainComponent } from './pages/main/main.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { LoginComponent } from './pages/login/login.component';
+import { GridProductsComponent } from './pages/grid-products/grid-products.component';
 
 const routes: Routes = [
   {
@@ -11,16 +10,12 @@ const routes: Routes = [
     component: MainComponent,
     children: [
       {
-        path: 'login',
-        component: LoginComponent
-      },
-      {
-        path: 'register',
-        component: RegisterComponent
+        path: 'grid',
+        component: GridProductsComponent
       },
       {
         path: '**',
-        redirectTo: 'login'
+        redirectTo: 'grid'
       }
     ]
   }
@@ -35,4 +30,4 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class AuthRoutingModule { }
+export class ProductsRoutingModule { }

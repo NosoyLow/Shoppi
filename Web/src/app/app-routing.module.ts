@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ErrorPageComponent } from './shared/error-page/error-page.component';
+import { FrontPageComponent } from './shared/front-page/front-page.component';
 
 const routes: Routes = [
   {
@@ -9,17 +9,18 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule )
   },
   {
-    path: '404',
-    component: ErrorPageComponent
+    path: 'products',
+    loadChildren: () => import('./products/products.module').then( m => m.ProductsModule )
+  },
+  {
+    path: '',
+    component: FrontPageComponent
   },
   {
     path: '**',
-    redirectTo: '404'
+    redirectTo: ''
   }
-
 ]
-
-
 
 @NgModule({
   imports: [

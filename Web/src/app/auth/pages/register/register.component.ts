@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms'
-import { RegisterService } from '../../services/register.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -13,9 +13,9 @@ export class RegisterComponent {
   imagen = []
   archivos = []
 
-  constructor(private formBuilder: FormBuilder,private RegService: RegisterService) {}
+  constructor(private formBuilder: FormBuilder,private authService: AuthService) {}
 
-  loginForm = this.formBuilder.group({
+  registerForm = this.formBuilder.group({
     username:[
       '', 
       [
@@ -60,17 +60,17 @@ export class RegisterComponent {
     ]
   })
 
-  noUsernameValid(){ return this.loginForm.controls.username.errors && this.loginForm.controls.username.touched }
+  noUsernameValid(){ return this.registerForm.controls.username.errors && this.registerForm.controls.username.touched }
   
-  noNameValid(){ return this.loginForm.controls.name.errors && this.loginForm.controls.name.touched }
+  noNameValid(){ return this.registerForm.controls.name.errors && this.registerForm.controls.name.touched }
 
-  noLastnameValid(){ return this.loginForm.controls.last_name.errors && this.loginForm.controls.last_name.touched }
+  noLastnameValid(){ return this.registerForm.controls.last_name.errors && this.registerForm.controls.last_name.touched }
 
-  noPhoneValid(){ return this.loginForm.controls.phone.errors && this.loginForm.controls.phone.touched }
+  noPhoneValid(){ return this.registerForm.controls.phone.errors && this.registerForm.controls.phone.touched }
 
-  noEmailValid(){ return this.loginForm.controls.email.errors && this.loginForm.controls.email.touched }
+  noEmailValid(){ return this.registerForm.controls.email.errors && this.registerForm.controls.email.touched }
 
-  noPasswordValid(){ return this.loginForm.controls.password.errors && this.loginForm.controls.password.touched }
+  noPasswordValid(){ return this.registerForm.controls.password.errors && this.registerForm.controls.password.touched }
 
   capturarFile(event: any){
     const archivoCapturado = event.target.files[0]
@@ -79,21 +79,21 @@ export class RegisterComponent {
   }
 
   saveForm(){
-    if ( this.loginForm.invalid ){
-      this.loginForm.markAllAsTouched()
+    if ( this.registerForm.invalid ){
+      this.registerForm.markAllAsTouched()
       return;
     }
 
     const formularioDeDatos = new FormData();
 
-    formularioDeDatos.append("username", this.loginForm.controls.username.value!.toString())
-    formularioDeDatos.append("name", this.loginForm.controls.name.value!.toString())
-    formularioDeDatos.append("last_name", this.loginForm.controls.last_name.value!.toString())
-    formularioDeDatos.append("email", this.loginForm.controls.email.value!.toString())
-    formularioDeDatos.append("password", this.loginForm.controls.password.value!.toString())
-    formularioDeDatos.append("phone", this.loginForm.controls.phone.value!.toString())
+    formularioDeDatos.append("username", this.registerForm.controls.username.value!.toString())
+    formularioDeDatos.append("name", this.registerForm.controls.name.value!.toString())
+    formularioDeDatos.append("last_name", this.registerForm.controls.last_name.value!.toString())
+    formularioDeDatos.append("email", this.registerForm.controls.email.value!.toString())
+    formularioDeDatos.append("password", this.registerForm.controls.password.value!.toString())
+    formularioDeDatos.append("phone", this.registerForm.controls.phone.value!.toString())
 
-    this.RegService.doRegister(formularioDeDatos, this.imagen)
+    this.authService.doRegister(formularioDeDatos, this.imagen)
   }
 
 }

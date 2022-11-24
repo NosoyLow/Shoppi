@@ -1,0 +1,23 @@
+mat-grid-tile {
+    background: lightblue;
+}
+
+mat-card {
+    max-width: 400px;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+.example-container {
+    background: rgb(237, 232, 229);
+}
+
+.low {
+    background: rgb(237, 232, 229);
+    margin-top: 1%;
+    margin-left: 1%;
+    width: 20%;
+}

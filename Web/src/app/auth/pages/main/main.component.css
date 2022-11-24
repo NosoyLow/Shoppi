@@ -1,1 +1,7 @@
-div {background-color: rgb(2237, 232, 229);}
+.section {
+    height: 100%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    text-align: center;
+    background: rgb(237, 232, 229);
+}
