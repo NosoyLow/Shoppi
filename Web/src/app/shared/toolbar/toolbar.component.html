@@ -1,8 +1,20 @@
-<p>
+<p *ngIf="auth; else elseBlock">
     <mat-toolbar>
-      <span>Shop Π</span>
-      <span class="example-spacer"></span>
-      <button mat-stroked-button color="warn" class="margin" (click)="goRegister()">Nuevo vendedor</button>
-      <button mat-raised-button color="warn" class="margin" (click)="goLogin()">Inicia sesión!</button>
+        <button class="btn" (click)="goFrontPage()">Shop Π</button>
+        <span class="example-spacer"></span>
+        <span>Antonio Low</span>
+        <button mat-icon-button aria-label="Ir a la cuenta" (click)="goUser()">
+            <mat-icon>account_circle</mat-icon>
+        </button>
     </mat-toolbar>
 </p>
+<ng-template #elseBlock>
+    <p>
+        <mat-toolbar>
+            <span>Shop Π</span>
+            <span class="example-spacer"></span>
+            <button mat-stroked-button color="warn" class="margin" (click)="goRegister()">Nuevo vendedor</button>
+            <button mat-raised-button color="warn" class="margin" (click)="goLogin()">Inicia sesión!</button>
+        </mat-toolbar>
+    </p>
+</ng-template>

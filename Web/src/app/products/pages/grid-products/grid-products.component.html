@@ -19,13 +19,14 @@
     <mat-drawer-content>
 
         <div>
-            <mat-card *ngFor="let product of Products">
+            <mat-card (click)="openg()" *ngFor="let product of Products">
                 <mat-card-header>
-                    <div mat-card-avatar class="example-header-image"></div>
+                    <img mat-card-avatar src="{{product.user_image_url}}">
+                    <!-- <div mat-card-avatar class="example-header-image"></div> -->
                     <mat-card-title>{{product.title}}</mat-card-title>
                     <mat-card-subtitle>{{product.user_username}}</mat-card-subtitle>
                 </mat-card-header>
-                <img mat-card-image src="{{product.image}}">
+                <img mat-card-image src="{{product.post_image_url}}">
                 <mat-card-content>
                     <p>
                         {{product.description}}

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductResponse } from 'src/app/interfaces/product-response';
-import {catchError, map, Observable, of} from "rxjs";
-
+import { host } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,7 @@ export class ProductsService {
   getProducts() {
     //return this.http.get("http://localhost:80/api/posts/get").map(res => {return res.json()})
 
-    return this.http.get<ProductResponse>("http://localhost:80/api/posts/get")
+    return this.http.get<ProductResponse>(`${host}posts/get`)
     //return this.http.get("http://localhost:80/api/posts/get").map((resp: Response => resp.json()))
   
   }

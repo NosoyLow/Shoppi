@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FrontPageComponent } from './front-page/front-page.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MaterialModule } from '../material/material.module';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   imports: [
@@ -11,12 +11,12 @@ import { MaterialModule } from '../material/material.module';
     MaterialModule
   ],
   declarations: [
-    ToolbarComponent,
-    FrontPageComponent
+    FrontPageComponent,
+    ToolbarComponent
   ],
   exports: [
-    ToolbarComponent,
-    FrontPageComponent
+    FrontPageComponent,
+    ToolbarComponent
   ]
 })
 export class SharedModule { }

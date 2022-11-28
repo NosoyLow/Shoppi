@@ -5,3 +5,14 @@
 .margin{
     margin-left: 8px;
 }
+
+.btn{ 
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    display: inline;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    text-decoration: none;
+}

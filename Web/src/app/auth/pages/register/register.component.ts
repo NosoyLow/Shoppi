@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms'
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -9,11 +11,12 @@ import { AuthService } from '../../services/auth.service';
 })
 
 export class RegisterComponent {
+  login = ["/auth/login"]
   hide = true;
   imagen = []
   archivos = []
 
-  constructor(private formBuilder: FormBuilder,private authService: AuthService) {}
+  constructor(private router: Router, private formBuilder: FormBuilder, public dialog: MatDialog, private authService: AuthService) {}
 
   registerForm = this.formBuilder.group({
     username:[
@@ -75,7 +78,6 @@ export class RegisterComponent {
   capturarFile(event: any){
     const archivoCapturado = event.target.files[0]
     this.imagen = archivoCapturado
-    //console.log(event.target.files)
   }
 
   saveForm(){
@@ -93,7 +95,16 @@ export class RegisterComponent {
     formularioDeDatos.append("password", this.registerForm.controls.password.value!.toString())
     formularioDeDatos.append("phone", this.registerForm.controls.phone.value!.toString())
 
-    this.authService.doRegister(formularioDeDatos, this.imagen)
+    this.authService.doRegister(formularioDeDatos, this.imagen).subscribe(
+      res => {this.router.navigate(this.login)},
+      err => {this.dialog.open(RegisterDialog);}
+    );
   }
 
 }
+
+@Component({
+  selector: 'register-dialog',
+  templateUrl: '../components/register/registerDialog.html',
+})
+export class RegisterDialog {}

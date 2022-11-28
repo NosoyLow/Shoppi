@@ -1,27 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { host } from '../../../environments/environment';
+import { LoginResponse } from '../../interfaces/login-response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient) {}
+  
   doRegister(data: FormData, image: any){
     
     data.append("image", image)
 
-    data.forEach((key,value)=>{console.log(key, value)})
-    this.http.post("http://localhost:80/api/register", data).subscribe( resp => console.log(resp))
+    //data.forEach((key,value)=>{console.log(key, value)})
+    return this.http.post(`${host}register`, data)
   }
 
   doLogin(loginForm: any){
-    this.http.post("http://localhost:80/api/login", loginForm, {observe: "response", withCredentials: true}).subscribe( resp => console.log(resp))
+    //this.http.post(`${host}login`, loginForm, {observe: "response", withCredentials: true}).subscribe( resp => console.log(resp))
+    return this.http.post<LoginResponse>(`${host}login`, loginForm, {observe: "response", withCredentials: true})
   }
 
-
-  doLoginTEST(loginForm: any){
-    this.http.post("http://localhost:80/api/login", loginForm, {observe: "response", withCredentials: true}).subscribe( resp => console.log(resp))
+  doAuth(){
+    return this.http.get<LoginResponse>(`${host}auth`, {observe: "response", withCredentials: true})
   }
+
 }

@@ -10,10 +10,10 @@ export class FrontPageComponent {
 
   constructor(private router: Router) { }
 
-  product = ["/products"]
+  products = ["/products"]
   
   goProducts(){
-    this.router.navigate(this.product)
+    this.router.navigate(this.products)
   }
 
 }
