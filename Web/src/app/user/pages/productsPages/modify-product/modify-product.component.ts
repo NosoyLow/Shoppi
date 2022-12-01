@@ -1,66 +1,50 @@
 import { Component, Inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { UserService } from '../../../services/user.service';
+import { UserService } from '../../../../services/user.service';
+import { categories } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-create-product',
-  templateUrl: './create-product.component.html',
-  styleUrls: ['./create-product.component.css']
+  selector: 'app-modify-product',
+  templateUrl: './modify-product.component.html',
+  styleUrls: ['./modify-product.component.css']
 })
-export class CreateProductComponent {
-  createProduct = ["user/createProduct"]
-  hide = true;
-  imagen = []
-  archivos = []
+export class ModifyProductComponent {
 
+  data: any
   Response: any
+  imagen = []
   isDisabled = false
-  
+  valImage = false
+  categories = categories
 
-  categories = [
-    {value: 'Comida'},
-    {value: 'Electrónica'},
-    {value: 'Anime'},
-    {value: 'Ropa'},
-    {value: 'Calzado'},
-    {value: 'Postres'},
-    {value: 'Videojuegos'},
-    {value: 'Servicios'},
-    {value: 'Asesorías'},
-    {value: 'Pines'},
-    {value: 'Stickers'},
-    {value: 'Trueque'},
-    {value: 'Variado'},
-  ];
-
-  constructor(private router: Router, private formBuilder: FormBuilder, public dialog: MatDialog, private userService: UserService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, public dialog: MatDialog, private userService: UserService) {
+    this.userService.getUserProduct(this.route.snapshot.paramMap.get('id')!).subscribe(
+      res => {this.data = res.data},
+      err => {console.log(err)},
+      () => { 
+        this.createProductForm.get("title")!.setValue(this.data.title);
+        this.createProductForm.get("description")!.setValue(this.data.description);
+        console.log(this.data)
+      }
+    )
+  }
 
   categoriesControl = new FormControl<CategoriesProducts | null>(null, Validators.required);
-
+  
   createProductForm = this.formBuilder.group({
-    title:[
-      '', 
-      [
-        Validators.required
-      ] 
-    ],
-    description:[
-      '', 
-      [
-        Validators.required
-      ] 
-    ]
+    title:['', [ Validators.required]],
+    description:['', [ Validators.required]]
   })
 
   noTitleValid(){ return this.createProductForm.controls.title.errors && this.createProductForm.controls.title.touched }
-  
   noDescriptionValid(){ return this.createProductForm.controls.description.errors && this.createProductForm.controls.description.touched }
 
   capturarFile(event: any){
     const archivoCapturado = event.target.files[0]
     this.imagen = archivoCapturado
+    this.valImage = true
   }
 
   saveForm(){
@@ -69,21 +53,30 @@ export class CreateProductComponent {
       this.categoriesControl.markAllAsTouched()
       return;
     }
-    this.isDisabled = true
+    this.isDisabled = false
     const formularioDeDatos = new FormData();
+    formularioDeDatos.append("post_id", this.data.id)
     formularioDeDatos.append("title", this.createProductForm.controls.title.value!.toString())
     formularioDeDatos.append("description", this.createProductForm.controls.description.value!.toString())
     formularioDeDatos.append("category", this.categoriesControl.value!.value.toString())
-    
-    this.userService.createProduct(formularioDeDatos, this.imagen).subscribe(
-      res => {  this.Response = res;
+
+    // if (this.valImage){
+    //   this.userService.modifyUserProduct(formularioDeDatos, this.imagen, 0)
+    // }
+    // else{
+    //   this.userService.modifyUserProduct(formularioDeDatos, this.imagen, 1)
+    // }
+
+      this.userService.modifyUserProduct(formularioDeDatos, this.imagen, 1).subscribe(
+      res => {  console.log(res);
+                this.Response = res;
                 if (this.Response.body.success == false){
                   this.dialog.open(createProductDialog, { data: this.Response.body.msg});
                 }
-                else{ this.reloadCurrentPage() }
+                else{ }//this.reloadCurrentPage() }
 
       },
-      err => { this.dialog.open(createProductDialog, { data: "Error del servidor, inténtalo más tarde"}); },
+      err => { console.log(err);this.dialog.open(createProductDialog, { data: "Error del servidor, inténtalo más tarde"}); },
       () => { this.isDisabled = false }
     );
   }
@@ -99,7 +92,7 @@ export class CreateProductComponent {
               <div mat-dialog-content>{{data}}</div>`,
 })
 export class createProductDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: CreateProductComponent) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ModifyProductComponent) {}
 }
 
 export interface CategoriesProducts {

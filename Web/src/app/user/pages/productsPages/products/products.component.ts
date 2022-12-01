@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from '../../../services/user.service';
+import { UserService } from '../../../../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ export class ProductsComponent {
   productsResponse: any
   productsData: any
 
-
+  createProductRoute = "user/createProduct"
   viewProductsRoute = "user/viewProduct/"
   modifyProductRoute = "user/modifyProduct/"
 
@@ -24,6 +24,10 @@ export class ProductsComponent {
     );
   }
 
+  createProduct(){
+    this.router.navigate([this.createProductRoute])
+  }
+
   viewProduct(productID: string){
     this.router.navigate([this.viewProductsRoute, productID])
   }
@@ -33,12 +37,10 @@ export class ProductsComponent {
   }
 
   deleteProduct(productID: string){
-    console.log(productID);
     this.userService.deleteUserProduct(productID).subscribe(
       res => { console.log(res) },
       err => { console.log(err) }
     );
   }
-
-
+  
 }

@@ -13,9 +13,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   createProduct(data: FormData, image: any){
-    
     data.append("image", image)
-
     //data.forEach((key,value)=>{console.log(key, value)})
     return this.http.post<CreateProductResponse>(`${host}posts/create`, data, {observe: "response", withCredentials: true})
   }
@@ -26,10 +24,17 @@ export class UserService {
   }
 
   getUserProduct(id: string){
-    return this.http.get<ProductID>(`${host}posts/get/${id}`)
+    return this.http.get<ProductID>(`${host}posts/get/${2}`)
   }
 
-  editUserProduct(){}
+  modifyUserProduct(data: FormData, image: any, val: number){
+    // console.log(val)
+    // if (val == 1){
+    //data.append("image", image)
+    // }
+    data.forEach((key,value)=>{console.log(key, value)})
+    return this.http.put(`${host}posts/update`, data, {observe: "response", withCredentials: true})
+  }
 
   deleteUserProduct(postId: string){
     return this.http.delete(`${host}posts/delete`, {body: {"post_id": postId}, observe: "response", withCredentials: true})

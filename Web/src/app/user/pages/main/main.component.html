@@ -1,9 +1,18 @@
 <mat-drawer-container class="section" fullscreen>
     <mat-drawer class="example-sidenav" mode="side" opened>
-        <h1>Shop Π</h1>
-        <button (click)="goProducts()" mat-raised-button>Productos</button>
+        <button mat-icon-button aria-label="Volver" (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <h1>Cuenta</h1>
+
+        <button (click)="goProducts()" mat-flat-button color="warn">Productos</button>
+        <br>
+        <button (click)="goAccount()" mat-flat-button color="warn">Información</button>
+        <br>
+        <button (click)="goAdmin()" mat-flat-button color="warn">Usuarios</button>
+        <br>
         <p>Lorem, ipsum dolor sit amet consectetur.</p>
-        <button (click)="Logout()" mat-raised-button>Cerrar Sesión</button>
+        <button (click)="Logout()" mat-flat-button color="warn">Cerrar Sesión</button>
     </mat-drawer>
     
     <div> <router-outlet></router-outlet> </div>

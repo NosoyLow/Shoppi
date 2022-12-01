@@ -8,13 +8,36 @@ import { Router } from '@angular/router';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
+
+  gridProductsRoute = ["products/grid"]
+  productsAccountRoute = ["user/products"]
+  infoAccount = [""]
+  adminUsers = [""]
+
+  login = ["auth/login"]
   showFiller = true;
   frontPage = [""]
-  constructor(private authService: AuthService, private router: Router) { }
 
-  goProducts(){}
+  constructor(private authService: AuthService, private router: Router) {
+    authService.doAuth().subscribe(
+      res => {},
+      err => { this.router.navigate(this.login) }
+    );
+  }
 
-  goAdmin(){}
+  goBack(){
+    this.router.navigate(this.gridProductsRoute)
+  }
+
+  goProducts(){
+    this.router.navigate(this.productsAccountRoute)
+  }
+
+  goAccount(){
+  }
+
+  goAdmin(){
+  }
 
   Logout(){
     this.authService.doLogOut().subscribe(resp => console.log(resp))

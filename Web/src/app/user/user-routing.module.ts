@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { MainComponent } from './pages/main/main.component';
-import { ProductsComponent } from './pages/products/products.component';
-import { CreateProductComponent } from './pages/create-product/create-product.component';
-import { ViewProductComponent } from './pages/view-product/view-product.component';
-import { ModifyProductComponent } from './pages/modify-product/modify-product.component';
+import { ProductsComponent } from './pages/productsPages/products/products.component';
+import { CreateProductComponent } from './pages/productsPages/create-product/create-product.component';
+import { ViewProductComponent } from './pages/productsPages/view-product/view-product.component';
+import { ModifyProductComponent } from './pages/productsPages/modify-product/modify-product.component';
+import { AccountComponent } from './pages/accountPages/account/account.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,18 @@ const routes: Routes = [
       {
         path: 'modifyProduct/:id',
         component: ModifyProductComponent
+      },
+      {
+        path: 'account/:id',
+        component: AccountComponent
+      },
+      {
+        path: 'modifyAccount/:id',
+        component: AccountComponent
+      },
+      {
+        path: 'admin/:id',
+        component: AccountComponent
       },
       {
         path: '**',
