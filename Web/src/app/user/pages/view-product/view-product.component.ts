@@ -9,12 +9,16 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ViewProductComponent {
   
+  data: any
+
   constructor(private userService: UserService ,private route: ActivatedRoute) { 
     this.userService.getUserProduct(this.route.snapshot.paramMap.get('id')!).subscribe(
-      res => {console.log(res)},
-      err => {console.log(err)}
+      res => {this.data = res.data},
+      err => {console.log(err)},
+      () => { console.log(this.data) }
     )
   }
+
 
 
 }

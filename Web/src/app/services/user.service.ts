@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { host } from 'src/environments/environment';
 import { CreateProductResponse } from '../interfaces/create-product-response';
 import { GetProducts } from 'src/app/interfaces/get-products';
+import { ProductID } from '../interfaces/productId';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class UserService {
   }
 
   getUserProduct(id: string){
-    return this.http.get(`${host}posts/get/${id}`)
+    return this.http.get<ProductID>(`${host}posts/get/${id}`)
   }
 
   editUserProduct(){}
