@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../../services/products.service';
-import { AuthService } from '../../../auth/services/auth.service';
+import { ProductsService } from '../../../services/products.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-grid-products',

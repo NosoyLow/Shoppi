@@ -21,6 +21,7 @@ export interface Datum {
     title:          string;
     description:    string;
     user_username:  string;
+    post_status:    number;
     user_name:      string;
     user_last_name: string;
     image:          string;

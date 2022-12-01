@@ -7,13 +7,17 @@ import { ProductsComponent } from './pages/products/products.component';
 import { CreateProductComponent } from './pages/create-product/create-product.component';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ViewProductComponent } from './pages/view-product/view-product.component';
+import { ModifyProductComponent } from './pages/modify-product/modify-product.component';
 
 
 @NgModule({
   declarations: [
     MainComponent,
     ProductsComponent,
-    CreateProductComponent
+    CreateProductComponent,
+    ViewProductComponent,
+    ModifyProductComponent
   ],
   imports: [
     CommonModule,

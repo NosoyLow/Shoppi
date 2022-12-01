@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { host } from '../../../environments/environment';
-import { LoginResponse } from '../../interfaces/login-response';
+import { host } from '../../environments/environment';
+import { LoginResponse } from '../interfaces/login-response';
 
 @Injectable({
   providedIn: 'root'
@@ -27,4 +27,7 @@ export class AuthService {
     return this.http.get<LoginResponse>(`${host}auth`, {observe: "response", withCredentials: true})
   }
 
+  doLogOut(){
+    return this.http.delete(`${host}logout`, {observe: "response", withCredentials: true})
+  }
 }

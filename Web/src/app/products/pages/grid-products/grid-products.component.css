@@ -1,22 +1,8 @@
-mat-grid-tile {
-    background: lightblue;
-}
-
 mat-card {
     max-width: 400px;
 }
 
-.example-header-image {
-    background-size: cover;
-}
-
-.example-container {
+.section {
+    height: 100%;
     background: rgb(237, 232, 229);
-}
-
-.low {
-    background: rgb(237, 232, 229);
-    margin-top: 1%;
-    margin-left: 0%;
-    width: 20%;
 }

@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   exports: [
@@ -24,7 +25,8 @@ import {MatDividerModule} from '@angular/material/divider';
     MatDialogModule,
     MatCheckboxModule,
     MatPaginatorModule,
-    MatDividerModule
+    MatDividerModule,
+    MatGridListModule
   ]
 })
 export class MaterialModule { }

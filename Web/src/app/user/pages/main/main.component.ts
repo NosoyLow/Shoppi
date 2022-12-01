@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -7,6 +9,15 @@ import { Component } from '@angular/core';
 })
 export class MainComponent {
   showFiller = true;
-  constructor() { }
+  frontPage = [""]
+  constructor(private authService: AuthService, private router: Router) { }
 
+  goProducts(){}
+
+  goAdmin(){}
+
+  Logout(){
+    this.authService.doLogOut().subscribe(resp => console.log(resp))
+    this.router.navigate(this.frontPage)
+  }
 }

@@ -1,14 +1,9 @@
-<!-- <section class="section">
-    <router-outlet></router-outlet>
-</section> -->
-
 <mat-drawer-container class="section" fullscreen>
     <mat-drawer class="example-sidenav" mode="side" opened>
         <h1>Shop Π</h1>
-        <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-        <button (click)="showFiller = !showFiller" mat-raised-button>
-          Toggle extra text
-        </button>
+        <button (click)="goProducts()" mat-raised-button>Productos</button>
+        <p>Lorem, ipsum dolor sit amet consectetur.</p>
+        <button (click)="Logout()" mat-raised-button>Cerrar Sesión</button>
     </mat-drawer>
     
     <div> <router-outlet></router-outlet> </div>

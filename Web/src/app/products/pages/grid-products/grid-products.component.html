@@ -1,8 +1,6 @@
-<app-toolbar></app-toolbar>
-
-<mat-drawer-container class="example-container">
-
-    <mat-drawer mode="side" opened class="low">
+<mat-drawer-container class="section" fullscreen>
+    <mat-drawer class="example-sidenav" mode="side" opened>
+        <h1>Shop Π</h1>
 
         <mat-form-field class="example-form-field">
             <mat-icon matPrefix>search</mat-icon>
@@ -12,12 +10,11 @@
               <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
-
-
+        <p>Lorem, ipsum dolor sit amet consectetur.</p>
     </mat-drawer>
 
     <mat-drawer-content>
-
+        <app-toolbar></app-toolbar>
         <div>
             <mat-card (click)="openg()" *ngFor="let product of Products">
                 <mat-card-header>
@@ -37,7 +34,5 @@
 
 
     </mat-drawer-content>
+
 </mat-drawer-container>
-
-
-
