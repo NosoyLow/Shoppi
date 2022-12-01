@@ -38,9 +38,13 @@ export class ProductsComponent {
 
   deleteProduct(productID: string){
     this.userService.deleteUserProduct(productID).subscribe(
-      res => { console.log(res) },
-      err => { console.log(err) }
+      res => { this.reloadCurrentPage() },
+      err => { this.reloadCurrentPage() }
     );
+  }
+
+  reloadCurrentPage() {
+    window.location.reload();
   }
   
 }

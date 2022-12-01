@@ -18,21 +18,16 @@ export class UserService {
     return this.http.post<CreateProductResponse>(`${host}posts/create`, data, {observe: "response", withCredentials: true})
   }
 
-  ///api/posts/getown
   getUserProducts(number: number){
     return this.http.get<GetProducts>(`${host}posts/getown?page=${number}`, {observe: "response", withCredentials: true})
   }
 
   getUserProduct(id: string){
-    return this.http.get<ProductID>(`${host}posts/get/${2}`)
+    return this.http.get<ProductID>(`${host}posts/get/${id}`)
   }
 
-  modifyUserProduct(data: FormData, image: any, val: number){
-    // console.log(val)
-    // if (val == 1){
-    //data.append("image", image)
-    // }
-    data.forEach((key,value)=>{console.log(key, value)})
+  modifyUserProduct(data: FormData, image: any){
+    data.append("image", image)
     return this.http.put(`${host}posts/update`, data, {observe: "response", withCredentials: true})
   }
 

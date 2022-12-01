@@ -18,15 +18,16 @@ export class ModifyProductComponent {
   isDisabled = false
   valImage = false
   categories = categories
+  userProductsRoute = ["user/products"]
+
 
   constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, public dialog: MatDialog, private userService: UserService) {
     this.userService.getUserProduct(this.route.snapshot.paramMap.get('id')!).subscribe(
       res => {this.data = res.data},
-      err => {console.log(err)},
+      err => {this.router.navigate(this.userProductsRoute)},
       () => { 
         this.createProductForm.get("title")!.setValue(this.data.title);
         this.createProductForm.get("description")!.setValue(this.data.description);
-        console.log(this.data)
       }
     )
   }
@@ -53,37 +54,25 @@ export class ModifyProductComponent {
       this.categoriesControl.markAllAsTouched()
       return;
     }
-    this.isDisabled = false
+
+    this.isDisabled = true
     const formularioDeDatos = new FormData();
     formularioDeDatos.append("post_id", this.data.id)
     formularioDeDatos.append("title", this.createProductForm.controls.title.value!.toString())
     formularioDeDatos.append("description", this.createProductForm.controls.description.value!.toString())
     formularioDeDatos.append("category", this.categoriesControl.value!.value.toString())
 
-    // if (this.valImage){
-    //   this.userService.modifyUserProduct(formularioDeDatos, this.imagen, 0)
-    // }
-    // else{
-    //   this.userService.modifyUserProduct(formularioDeDatos, this.imagen, 1)
-    // }
-
-      this.userService.modifyUserProduct(formularioDeDatos, this.imagen, 1).subscribe(
-      res => {  console.log(res);
-                this.Response = res;
+    this.userService.modifyUserProduct(formularioDeDatos, this.imagen).subscribe(
+      res => {  this.Response = res;
                 if (this.Response.body.success == false){
                   this.dialog.open(createProductDialog, { data: this.Response.body.msg});
                 }
-                else{ }//this.reloadCurrentPage() }
-
       },
-      err => { console.log(err);this.dialog.open(createProductDialog, { data: "Error del servidor, inténtalo más tarde"}); },
-      () => { this.isDisabled = false }
+      err => {this.dialog.open(createProductDialog, { data: "Error del servidor, inténtalo más tarde"}); },
+      () => { this.isDisabled = false, this.router.navigate(this.userProductsRoute)}
     );
   }
   
-  reloadCurrentPage() {
-    window.location.reload();
-  }
 }
 
 @Component({
