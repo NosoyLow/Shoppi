@@ -9,11 +9,12 @@ import { Router } from '@angular/router';
 })
 export class AccountComponent {
   
+  data:  any
   login = ["auth/login"]
 
   constructor(private authService: AuthService, private router: Router) {
     authService.doAuth().subscribe(
-      res => {console.log(res)},
+      res => {this.data = res.body?.user_data},
       err => { this.router.navigate(this.login) }
     );
   }

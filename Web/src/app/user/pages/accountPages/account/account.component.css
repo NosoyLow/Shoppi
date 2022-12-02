@@ -1,0 +1,19 @@
+img {
+    display: block;
+    width: 250px;
+    border-radius: 50%;
+    
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.info {
+    
+    padding: 50px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    line-height: 2;
+    width: 100%;
+
+}
