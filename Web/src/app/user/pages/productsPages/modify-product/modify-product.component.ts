@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { UserService } from '../../../../services/user.service';
 import { categories } from 'src/environments/environment';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-modify-product',
@@ -12,6 +13,7 @@ import { categories } from 'src/environments/environment';
 })
 export class ModifyProductComponent {
 
+  previsualizacion: any
   data: any
   Response: any
   imagen = []
@@ -21,7 +23,7 @@ export class ModifyProductComponent {
   userProductsRoute = ["user/products"]
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, public dialog: MatDialog, private userService: UserService) {
+  constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, public dialog: MatDialog, private userService: UserService, private sanitizer: DomSanitizer) {
     this.userService.getUserProduct(this.route.snapshot.paramMap.get('id')!).subscribe(
       res => {this.data = res.data},
       err => {this.router.navigate(this.userProductsRoute)},
@@ -44,9 +46,36 @@ export class ModifyProductComponent {
 
   capturarFile(event: any){
     const archivoCapturado = event.target.files[0]
+    // this.extraerBase64(archivoCapturado).then((imagen: any) => {
+    //   this.previsualizacion = imagen.base;
+    //   console.log(imagen);
+    // }
+    //   )
     this.imagen = archivoCapturado
     this.valImage = true
   }
+
+  // extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
+  //   try {
+  //     const unsafeImg = window.URL.createObjectURL($event);
+  //     const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL($event);
+  //     reader.onload = () => {
+  //       resolve({
+  //         base: reader.result
+  //       });
+  //     };
+  //     reader.onerror = error => {
+  //       resolve({
+  //         base: null
+  //       });
+  //     };
+
+  //   } catch (e) {
+  //     return null;
+  //   }
+  // })
 
   saveForm(){
     if ( this.createProductForm.invalid || this.categoriesControl.invalid){
