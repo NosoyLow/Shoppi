@@ -1,8 +1,9 @@
-<mat-drawer-container class="section" fullscreen>
-    <mat-drawer class="example-sidenav" mode="side" opened>
-        <h1>Shop Π</h1>
-
-        <mat-form-field class="example-form-field">
+<mat-drawer-container fullscreen>
+    <mat-drawer class="barnav" mode="side" opened>
+        <!-- <h1 class="text__design">Shop Π</h1> -->
+        <img class="logo" src="../../../../assets/img/75719d1b-b4e1-43b8-8558-b83da92fd2a4-removebg-preview.png">
+        <br>
+        <mat-form-field class="text__design">
             <mat-icon matPrefix>search</mat-icon>
             <mat-label>Buscar producto</mat-label>
             <input matInput type="text" [(ngModel)]="value">
@@ -10,25 +11,26 @@
               <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
-        <p>Lorem, ipsum dolor sit amet consectetur.</p>
+        <p class="text__design">Lorem, ipsum dolor sit amet consectetur.</p>
     </mat-drawer>
 
     <mat-drawer-content>
         <app-toolbar></app-toolbar>
-        <div>
-            <mat-card *ngFor="let product of Products" (click)="viewProduct(product.id)">
+        <div class="row">
+            <mat-card class="order" *ngFor="let product of Products" (click)="viewProduct(product.id)">
+                <div class="column">
                 <mat-card-header>
                     <img mat-card-avatar src="{{product.user_image_url}}">
-                    <!-- <div mat-card-avatar class="example-header-image"></div> -->
                     <mat-card-title>{{product.title}}</mat-card-title>
                     <mat-card-subtitle>{{product.user_username}}</mat-card-subtitle>
                 </mat-card-header>
-                <img mat-card-image src="{{product.post_image_url}}">
+                <img align="center" mat-card-image src="{{product.post_image_url}}">
                 <mat-card-content>
-                    <p>
+                    <p class="font" align="center">
                         {{product.description}}
                     </p>
                 </mat-card-content>
+                </div>
             </mat-card>
         </div>
 

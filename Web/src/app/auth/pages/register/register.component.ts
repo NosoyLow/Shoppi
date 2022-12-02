@@ -97,7 +97,7 @@ export class RegisterComponent {
 
     this.authService.doRegister(formularioDeDatos, this.imagen).subscribe(
       res => {this.router.navigate(this.login)},
-      err => {this.dialog.open(RegisterDialog);}
+      err => {this.dialog.open(RegisterDialog); console.log(err)}
     );
   }
 

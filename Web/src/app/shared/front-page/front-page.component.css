@@ -66,8 +66,9 @@ footer{
 }
   
 .logo img{
-    width: 30px;
+    width: 100px;
     margin-top: 10px;
+    border-radius: 4pxs;
 }
   
 .box__footer h2{
