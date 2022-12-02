@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductsService } from '../../../services/products.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-grid-products',
@@ -12,15 +12,22 @@ export class GridProductsComponent{
   Response: any
   Products : any
   productIDRouter = "products/product"
+  
+  constructor(private productsService: ProductsService, private router: Router, private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(
+      params => console.log('queryParams', params['activated']));
 
-  constructor(private productsService: ProductsService, private router: Router) {
     productsService.getProducts().subscribe(resp => {
+
       this.Response = resp
       this.Products = resp.data
-     })
-  }
+     },
+     err => {},
+     () => {let low = this.Response.total_pages}
+  )}
 
   viewProduct(idProduct: string){
     this.router.navigate([this.productIDRouter, idProduct])
   }
+
 }

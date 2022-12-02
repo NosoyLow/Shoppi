@@ -6,7 +6,8 @@ export const environment = {
   production: false
 };
 
-export const host = "https://localhost:444/api/"; 
+export const host = "https://localhost:444/api/";
+export const hostCloud = "https://shoppi.eastus.cloudapp.azure.com/api/";
 
 export const categories = [
   {value: 'Comida'},
@@ -23,3 +24,5 @@ export const categories = [
   {value: 'Trueque'},
   {value: 'Variado'},
 ];
+
+export const ROUTEproductGrid ='products/grid';

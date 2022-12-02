@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { host } from '../../environments/environment';
+import { hostCloud } from '../../environments/environment';
 import { LoginResponse } from '../interfaces/login-response';
 
 @Injectable({
@@ -20,14 +21,14 @@ export class AuthService {
 
   doLogin(loginForm: any){
     //this.http.post(`${host}login`, loginForm, {observe: "response", withCredentials: true}).subscribe( resp => console.log(resp))
-    return this.http.post<LoginResponse>(`${host}login`, loginForm, {observe: "response", withCredentials: true})
+    return this.http.post<LoginResponse>(`${hostCloud}login`, loginForm, {observe: "response", withCredentials: true})
   }
 
   doAuth(){
-    return this.http.get<LoginResponse>(`${host}auth`, {observe: "response", withCredentials: true})
+    return this.http.get<LoginResponse>(`${hostCloud}auth`, {observe: "response", withCredentials: true})
   }
 
   doLogOut(){
-    return this.http.delete(`${host}logout`, {observe: "response", withCredentials: true})
+    return this.http.delete(`${hostCloud}logout`, {observe: "response", withCredentials: true})
   }
 }

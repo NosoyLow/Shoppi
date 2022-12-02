@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ROUTEproductGrid } from '../../../environments/environment';
 
 @Component({
   selector: 'app-front-page',
@@ -10,10 +11,8 @@ export class FrontPageComponent {
 
   constructor(private router: Router) { }
 
-  products = ["/products"]
-  
   goProducts(){
-    this.router.navigate(this.products)
+    this.router.navigate([ROUTEproductGrid])
   }
 
 }
