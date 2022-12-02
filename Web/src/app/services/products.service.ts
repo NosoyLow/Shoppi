@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductResponse } from 'src/app/interfaces/product-response';
-import { host } from 'src/environments/environment';
 import { hostCloud } from '../../environments/environment';
 
 @Injectable({
@@ -11,9 +10,11 @@ export class ProductsService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts() {
-    return this.http.get<ProductResponse>(`${hostCloud}posts/get`)
+  getProducts(params: string | undefined) {
+    if (params == undefined || params == ""){
+      return this.http.get<ProductResponse>(`${hostCloud}posts/get`)
+    }else {
+      return this.http.get<ProductResponse>(`${hostCloud}posts/get?${params}`)
+    }
   }
-
-
 }

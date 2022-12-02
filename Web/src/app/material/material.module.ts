@@ -9,9 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   exports: [
@@ -24,9 +22,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatSelectModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatPaginatorModule,
-    MatDividerModule,
-    MatGridListModule
+    MatDividerModule
   ]
 })
 export class MaterialModule { }

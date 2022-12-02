@@ -1,23 +1,56 @@
 <mat-drawer-container fullscreen>
+
     <mat-drawer class="barnav" mode="side" opened>
-        <!-- <h1 class="text__design">Shop Π</h1> -->
-        <img class="logo" src="../../../../assets/img/75719d1b-b4e1-43b8-8558-b83da92fd2a4-removebg-preview.png">
-        <br>
-        <mat-form-field class="text__design">
-            <mat-icon matPrefix>search</mat-icon>
-            <mat-label>Buscar producto</mat-label>
-            <input matInput type="text" [(ngModel)]="value">
-            <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-              <mat-icon>close</mat-icon>
+        <div class="altura">
+            <img class="logo" src="../../../../assets/img/75719d1b-b4e1-43b8-8558-b83da92fd2a4-removebg-preview.png">
+            <br><br><br>
+            <mat-form-field class="center">
+                <mat-icon matPrefix>search</mat-icon>
+                <mat-label>Buscar producto</mat-label>
+                <input matInput type="text" [(ngModel)]="value">
+                <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="center" appearance="fill">
+                <mat-label>Categoría</mat-label>
+                <mat-select [(value)]="selected">
+                  <mat-option>Todas</mat-option>
+                  <mat-option *ngFor="let category of categories" [value]="category.value">
+                    {{category.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="center">
+                <button mat-raised-button color="warn" (click)="addCategoria()">Buscar</button>
+            </div>
+        </div>
+        <div>
+            <div class="center">Página {{currentPage}} de {{finalPage}}</div>
+            <div class="center">
+            <button mat-icon-button (click)="goFirstPage()" [disabled]="disabledFirst">
+                <mat-icon>first_page</mat-icon>
             </button>
-        </mat-form-field>
-        <p class="text__design">Lorem, ipsum dolor sit amet consectetur.</p>
+            <button mat-icon-button (click)="goBackPage()" [disabled]="disabledBack">
+                <mat-icon>chevron_left</mat-icon>
+            </button>
+            <button mat-icon-button (click)="goNextPage()" [disabled]="disabledNext">
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+            <button mat-icon-button (click)="goEndPage()" [disabled]="disabledEnd">
+                <mat-icon>last_page</mat-icon>
+            </button>
+            </div>
+        </div>
+        
     </mat-drawer>
 
     <mat-drawer-content>
+        
         <app-toolbar></app-toolbar>
         <div class="row">
-            <mat-card class="order" *ngFor="let product of Products" (click)="viewProduct(product.id)">
+            <mat-card class="order" *ngFor="let product of Products" (click)="goViewProduct(product.id)">
                 <div class="column">
                 <mat-card-header>
                     <img mat-card-avatar src="{{product.user_image_url}}">
@@ -33,7 +66,6 @@
                 </div>
             </mat-card>
         </div>
-
 
     </mat-drawer-content>
 

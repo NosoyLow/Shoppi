@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { ROUTEfrontPage, ROUTEproductGrid, ROUTEuserAccount, ROUTEuserProducts } from 'src/environments/environment';
+import { ROUTElogin } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-main',
@@ -9,32 +11,23 @@ import { Router } from '@angular/router';
 })
 export class MainComponent {
 
-  gridProductsRoute = ["products/grid"]
-  productsAccountRoute = ["user/products"]
-  infoAccountRoute = ["user/account"]
-  adminUsersRoute = [""]
-
-  login = ["auth/login"]
-  showFiller = true;
-  frontPage = [""]
-
   constructor(private authService: AuthService, private router: Router) {
     authService.doAuth().subscribe(
       res => {},
-      err => { this.router.navigate(this.login) }
+      err => { this.router.navigate([ROUTElogin]) }
     );
   }
 
   goBack(){
-    this.router.navigate(this.gridProductsRoute)
+    this.router.navigate([ROUTEproductGrid])
   }
 
   goProducts(){
-    this.router.navigate(this.productsAccountRoute)
+    this.router.navigate([ROUTEuserProducts])
   }
 
   goAccount(){
-    this.router.navigate(this.infoAccountRoute)
+    this.router.navigate([ROUTEuserAccount])
   }
 
   goAdmin(){
@@ -42,6 +35,6 @@ export class MainComponent {
 
   Logout(){
     this.authService.doLogOut().subscribe(resp => console.log(resp))
-    this.router.navigate(this.frontPage)
+    this.router.navigate([ROUTEfrontPage])
   }
 }

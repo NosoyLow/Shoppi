@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { host, hostCloud } from 'src/environments/environment';
+import { hostCloud } from 'src/environments/environment';
 import { CreateProductResponse } from '../interfaces/create-product-response';
 import { GetProducts } from 'src/app/interfaces/get-products';
 import { ProductID } from '../interfaces/productId';
@@ -17,8 +17,12 @@ export class UserService {
     return this.http.post<CreateProductResponse>(`${hostCloud}posts/create`, data, {observe: "response", withCredentials: true})
   }
 
-  getUserProducts(number: number){
-    return this.http.get<GetProducts>(`${hostCloud}posts/getown?page=${number}`, {observe: "response", withCredentials: true})
+  getUserProducts(param: any){
+    if (param == ""){
+      return this.http.get<GetProducts>(`${hostCloud}posts/getown`, {observe: "response", withCredentials: true})
+    }else {
+      return this.http.get<GetProducts>(`${hostCloud}posts/getown?${param}`, {observe: "response", withCredentials: true})
+    }
   }
 
   getUserProduct(id: string){
@@ -27,7 +31,12 @@ export class UserService {
 
   modifyUserProduct(data: FormData, image: any){
     data.append("image", image)
-    data.forEach((key,value)=>{console.log(key, value)})
+    //return this.http.put(`${hostCloud}posts/update`, data, {observe: "response", withCredentials: true})
+    // let Low = new FormData();
+    // Low.append("post_id", "638425ae3c5bb1e1b538b506")
+    // Low.append("title", "Prueba")
+    // Low.append("description", "quiero dormir")
+    // Low.append("category", "Comida")
     return this.http.put(`${hostCloud}posts/update`, data, {observe: "response", withCredentials: true})
   }
 

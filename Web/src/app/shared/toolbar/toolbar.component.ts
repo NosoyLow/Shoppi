@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { ROUTEfrontPage, ROUTElogin, ROUTEregister, ROUTEuserProducts } from 'src/environments/environment';
 
 @Component({
   selector: 'app-toolbar',
@@ -14,30 +15,28 @@ export class ToolbarComponent{
 
   constructor(private authService: AuthService, private router: Router) {
     this.authService.doAuth().subscribe(
-      res => {this.data = res.body?.user_data; this.auth = true},
+      res => {
+        this.data = res.body?.user_data; 
+        this.auth = true
+      },
       err => {this.auth = false}
     );
   }
 
-  register = ["auth/register"]
-  login = ["auth/login"]
-  frontPage = [""]
-  user = ["/user"]
-
   goRegister(){
-    this.router.navigate(this.register)
+    this.router.navigate([ROUTEregister])
   }
 
   goLogin(){
-    this.router.navigate(this.login)
+    this.router.navigate([ROUTElogin])
   }
 
   goUser(){
-    this.router.navigate(this.user);
+    this.router.navigate([ROUTEuserProducts]);
   }
 
   goFrontPage(){
-    this.router.navigate(this.frontPage)
+    this.router.navigate([ROUTEfrontPage])
   }
 
 }

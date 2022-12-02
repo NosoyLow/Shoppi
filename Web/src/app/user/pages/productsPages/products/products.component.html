@@ -1,6 +1,6 @@
-<div class="row">
-    <mat-card class="example-card" *ngFor="let product of productsData">
-        <div class="column">
+<div class="container">
+    <div class="row">
+        <mat-card class="example-card" *ngFor="let product of productsData">
             <mat-card-header>
                 <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
                 <mat-card-title>{{product.title}}</mat-card-title>
@@ -15,12 +15,30 @@
                 <button mat-button (click)="modifyProduct(product.id)">EDITAR</button>
                 <button mat-button (click)="deleteProduct(product.id)">BORRAR</button>
             </mat-card-actions>
+        </mat-card>
+    </div>
+    <br>
+    <div>
+        <div class="center">Página {{currentPage}} de {{finalPage}}</div>
+        <div class="center">
+        <button mat-icon-button (click)="goFirstPage()" [disabled]="disabledFirst">
+            <mat-icon>first_page</mat-icon>
+        </button>
+        <button mat-icon-button (click)="goBackPage()" [disabled]="disabledBack">
+            <mat-icon>chevron_left</mat-icon>
+        </button>
+        <button mat-icon-button (click)="goNextPage()" [disabled]="disabledNext">
+            <mat-icon>chevron_right</mat-icon>
+        </button>
+        <button mat-icon-button (click)="goEndPage()" [disabled]="disabledEnd">
+            <mat-icon>last_page</mat-icon>
+        </button>
         </div>
-    </mat-card>
-</div>
-
-<div>
-    <button mat-fab color="warn" class="fab-button" aria-label="Add product" (click)="createProduct()">
-      <mat-icon>add</mat-icon>
-    </button>
+    </div>
+    <br>
+    <div>
+        <button mat-fab color="warn" class="fab-button" aria-label="Add product" (click)="createProduct()">
+          <mat-icon>add</mat-icon>
+        </button>
+    </div>
 </div>

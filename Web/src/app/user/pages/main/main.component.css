@@ -1,31 +1,33 @@
 .section {
     height: 100%;
-    background: rgb(255, 187, 148);
+    background: #fa8171;
 }
 
-.center__item{
+.buttonRouter{
+    border-radius: 10px;
+    width: 200px;
+    font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
-button{
-    background-color: transparent;
-    color: #ffffff;
-    border: 2px solid #ffffff;
+.buttonAccount{
     border-radius: 10px;
-    width: 169px;
-    font-size: 20px;
-}
-  
-.button__align{
-    margin-right: 200px;
+    width: 200px;
+    font-size: 30px;
+    margin-top: 10px;
 }
 
-.text__design{
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
+.barnav{
+    width: 250px;
 }
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

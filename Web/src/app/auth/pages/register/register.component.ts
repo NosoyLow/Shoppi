@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../../services/auth.service';
+import { ROUTElogin } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -11,12 +12,12 @@ import { AuthService } from '../../../services/auth.service';
 })
 
 export class RegisterComponent {
-  login = ["/auth/login"]
   hide = true;
   imagen = []
   archivos = []
+  isDisabled = false
 
-  constructor(private router: Router, private formBuilder: FormBuilder, public dialog: MatDialog, private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder, public dialog: MatDialog) {}
 
   registerForm = this.formBuilder.group({
     username:[
@@ -64,15 +65,10 @@ export class RegisterComponent {
   })
 
   noUsernameValid(){ return this.registerForm.controls.username.errors && this.registerForm.controls.username.touched }
-  
   noNameValid(){ return this.registerForm.controls.name.errors && this.registerForm.controls.name.touched }
-
   noLastnameValid(){ return this.registerForm.controls.last_name.errors && this.registerForm.controls.last_name.touched }
-
   noPhoneValid(){ return this.registerForm.controls.phone.errors && this.registerForm.controls.phone.touched }
-
   noEmailValid(){ return this.registerForm.controls.email.errors && this.registerForm.controls.email.touched }
-
   noPasswordValid(){ return this.registerForm.controls.password.errors && this.registerForm.controls.password.touched }
 
   capturarFile(event: any){
@@ -85,6 +81,7 @@ export class RegisterComponent {
       this.registerForm.markAllAsTouched()
       return;
     }
+    this.isDisabled = true
 
     const formularioDeDatos = new FormData();
 
@@ -96,8 +93,8 @@ export class RegisterComponent {
     formularioDeDatos.append("phone", this.registerForm.controls.phone.value!.toString())
 
     this.authService.doRegister(formularioDeDatos, this.imagen).subscribe(
-      res => {this.router.navigate(this.login)},
-      err => {this.dialog.open(RegisterDialog); console.log(err)}
+      res =>  { this.router.navigate([ROUTElogin]) },
+      err =>  { this.dialog.open(RegisterDialog); this.isDisabled = false }
     );
   }
 

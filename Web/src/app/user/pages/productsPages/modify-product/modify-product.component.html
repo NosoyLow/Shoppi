@@ -1,5 +1,5 @@
 <form  (ngSubmit)="saveForm()" [formGroup]="createProductForm" class="form-container">
-    <mat-card>
+    <mat-card *ngIf="dataExists">
 
         <mat-card-header>
             <mat-card-title>Modifica un producto!</mat-card-title>
@@ -57,7 +57,7 @@
 
             </div>
             
-            
+    
 
         </mat-card-content>
 

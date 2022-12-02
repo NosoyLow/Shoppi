@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { host } from '../../environments/environment';
 import { hostCloud } from '../../environments/environment';
 import { LoginResponse } from '../interfaces/login-response';
 
@@ -8,19 +7,15 @@ import { LoginResponse } from '../interfaces/login-response';
   providedIn: 'root'
 })
 export class AuthService {
-
+  //data.forEach((key,value)=>{console.log(key, value)})
   constructor(private http: HttpClient) {}
   
   doRegister(data: FormData, image: any){
-    
     data.append("image", image)
-
-    //data.forEach((key,value)=>{console.log(key, value)})
-    return this.http.post(`${host}register`, data)
+    return this.http.post(`${hostCloud}}register`, data)
   }
 
   doLogin(loginForm: any){
-    //this.http.post(`${host}login`, loginForm, {observe: "response", withCredentials: true}).subscribe( resp => console.log(resp))
     return this.http.post<LoginResponse>(`${hostCloud}login`, loginForm, {observe: "response", withCredentials: true})
   }
 

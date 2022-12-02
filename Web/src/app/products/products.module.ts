@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 import { MainComponent } from './pages/main/main.component';
 import { GridProductsComponent } from './pages/grid-products/grid-products.component';
-import { MenuComponent } from './pages/menu/menu.component';
 
 import { ProductsRoutingModule } from './products-routing.module';
 import { SharedModule } from '../shared/shared.module';
@@ -13,7 +12,6 @@ import { MaterialModule } from '../material/material.module';
 @NgModule({
   declarations: [
     MainComponent,
-    MenuComponent,
     GridProductsComponent
   ],
   imports: [

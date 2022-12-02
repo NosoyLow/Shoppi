@@ -1,18 +1,18 @@
 <mat-drawer-container class="section" fullscreen>
-    <mat-drawer class="example-sidenav" mode="side" opened>
-        <button mat-icon-button aria-label="Volver" (click)="goBack()">
-            <mat-icon>arrow_back</mat-icon>
-        </button>
-        <h1 class="text__design">Cuenta</h1>
-
-        <button class="center__item" (click)="goProducts()" mat-flat-button color="warn">Productos</button>
+    <mat-drawer class="barnav" mode="side" opened>
+        <div>
+            <button mat-icon-button class="buttonAccount" aria-label="Volver" (click)="goBack()">
+                <mat-icon>arrow_back</mat-icon>Mi Cuenta
+            </button>
+        </div>
+        <br><br>
+        <button class="buttonRouter" (click)="goProducts()" mat-flat-button color="warn">Productos</button>
         <br>
-        <button class="center__item" (click)="goAccount()" mat-flat-button color="warn">Información</button>
+        <button class="buttonRouter" (click)="goAccount()" mat-flat-button color="warn">Información</button>
         <br>
-        <button class="center__item" (click)="goAdmin()" mat-flat-button color="warn">Usuarios</button>
-        <br>
-        <!-- <p class="text__design">Lorem, ipsum dolor sit amet consectetur.</p> -->
-        <button class="center__item" (click)="Logout()" mat-flat-button color="warn">Cerrar Sesión</button>
+        <!-- <button class="center__item" (click)="goAdmin()" mat-flat-button color="warn">Usuarios</button>
+        <br> -->
+        <button class="buttonRouter" (click)="Logout()" mat-flat-button color="warn">Cerrar Sesión</button>
     </mat-drawer>
     
     <div> <router-outlet></router-outlet> </div>

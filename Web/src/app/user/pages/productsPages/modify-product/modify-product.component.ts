@@ -2,9 +2,9 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { UserService } from '../../../../services/user.service';
 import { categories } from 'src/environments/environment';
-import { DomSanitizer } from '@angular/platform-browser';
+import { ROUTEuserProducts } from '../../../../../environments/environment';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-modify-product',
@@ -13,21 +13,21 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class ModifyProductComponent {
 
-  previsualizacion: any
   data: any
   Response: any
+  dataExists = false
+  previsualizacion: any
   imagen = []
   isDisabled = false
   valImage = false
   categories = categories
-  userProductsRoute = ["user/products"]
-
-
-  constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, public dialog: MatDialog, private userService: UserService, private sanitizer: DomSanitizer) {
+  
+  constructor( private userService: UserService, private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, public dialog: MatDialog) {
     this.userService.getUserProduct(this.route.snapshot.paramMap.get('id')!).subscribe(
-      res => {this.data = res.data},
-      err => {this.router.navigate(this.userProductsRoute)},
-      () => { 
+      res => { this.data = res.data },
+      err => { this.router.navigate([ROUTEuserProducts]) },
+      () => {
+        this.dataExists = true
         this.createProductForm.get("title")!.setValue(this.data.title);
         this.createProductForm.get("description")!.setValue(this.data.description);
       }
@@ -45,40 +45,12 @@ export class ModifyProductComponent {
   noDescriptionValid(){ return this.createProductForm.controls.description.errors && this.createProductForm.controls.description.touched }
 
   capturarFile(event: any){
-    const archivoCapturado = event.target.files[0]
-    // this.extraerBase64(archivoCapturado).then((imagen: any) => {
-    //   this.previsualizacion = imagen.base;
-    //   console.log(imagen);
-    // }
-    //   )
-    this.imagen = archivoCapturado
+    this.imagen  = event.target.files[0]
     this.valImage = true
   }
 
-  // extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
-  //   try {
-  //     const unsafeImg = window.URL.createObjectURL($event);
-  //     const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL($event);
-  //     reader.onload = () => {
-  //       resolve({
-  //         base: reader.result
-  //       });
-  //     };
-  //     reader.onerror = error => {
-  //       resolve({
-  //         base: null
-  //       });
-  //     };
-
-  //   } catch (e) {
-  //     return null;
-  //   }
-  // })
-
   saveForm(){
-    if ( this.createProductForm.invalid || this.categoriesControl.invalid){
+    if ( this.createProductForm.invalid || this.categoriesControl.invalid ){
       this.createProductForm.markAllAsTouched()
       this.categoriesControl.markAllAsTouched()
       return;
@@ -98,7 +70,7 @@ export class ModifyProductComponent {
                 }
       },
       err => {this.dialog.open(createProductDialog, { data: "Error del servidor, inténtalo más tarde"}); },
-      () => { this.isDisabled = false, this.router.navigate(this.userProductsRoute)}
+      () => { this.isDisabled = false, this.router.navigate([ROUTEuserProducts]) }
     );
   }
   

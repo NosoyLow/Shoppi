@@ -1,5 +1,4 @@
-<mat-drawer-container *ngIf="dataExists">
-    <div>
+<div *ngIf="dataExists">
         <mat-card>
             <mat-card-header>
                 <img class = "ImgProduct" src="{{data.post_image_url}}">
@@ -13,7 +12,7 @@
                     <p>{{data.user_name}}</p>
                 </div>
             </mat-card-header>
+            <button mat-raised-button color="primary" (click)="goWhatsapp()">Mandar mensaje a Whatsapp</button>
         </mat-card>
-        <button mat-button color="primary" (click)="goWhatsapp()">Mandar mensaje a Whatsapp</button>
-    </div>
-</mat-drawer-container>
+        
+</div>

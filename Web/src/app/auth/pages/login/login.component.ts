@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../../services/auth.service';
+import { ROUTEproductGrid } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +12,10 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class LoginComponent {
   
-  products = ["/products"]
   hide = true;
+  isDisabled = false
 
-  constructor(private router: Router, private formBuilder: FormBuilder, public dialog: MatDialog, private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder, public dialog: MatDialog, ) {}
 
   loginForm = this.formBuilder.group({
     email:[
@@ -33,55 +34,21 @@ export class LoginComponent {
     ]
   })
 
-  noUserValid(){
-    return this.loginForm.controls.email.errors && this.loginForm.controls.email.touched
-  }
-
-  noPasswordValid(){
-    return this.loginForm.controls.password.errors && this.loginForm.controls.password.touched
-  }
-
-  goProducts(){
-    this.router.navigate(this.products)
-  }
+  noUserValid(){ return this.loginForm.controls.email.errors && this.loginForm.controls.email.touched }
+  noPasswordValid(){ return this.loginForm.controls.password.errors && this.loginForm.controls.password.touched }
 
   saveForm(){
     if ( this.loginForm.invalid ){
       this.loginForm.markAllAsTouched()
       return;
     }
-
+    this.isDisabled = true
     this.authService.doLogin(this.loginForm.value).subscribe(
-      res => {this.router.navigate(this.products)},
-      err => {this.dialog.open(LoginDialog);}
+      res =>  { this.router.navigate([ROUTEproductGrid]) },
+      err =>  { this.dialog.open(LoginDialog); this.isDisabled = false}
     );
   }
 
-  // saveFormd(){
-  //   if ( this.loginForm.invalid ){
-  //     this.loginForm.markAllAsTouched()
-  //     return;
-  //   }
-
-  //   //console.log('Data:', this.loginForm.value);
-  //   let loginResponse: any
-  //   this.authService.doLogin(this.loginForm.value).subscribe((resp) => {
-  //     loginResponse = resp.body
-  //     console.log(loginResponse)
-  //    },
-  //    (error) => {console.log("Soyunerror")}    
-  //    )
-
-
-  //   if (loginResponse == true){
-  //     console.log("Sesión iniciada")
-  //   }
-  //   else{
-  //     console.log("Sesión no iniciada")
-  //   }
-  //    //this.dialog.open(LoginDialog);
-  
-  // }
 }
 
 @Component({

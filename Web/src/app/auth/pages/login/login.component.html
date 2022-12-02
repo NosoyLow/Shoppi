@@ -1,6 +1,5 @@
-<form  (ngSubmit)="saveForm()" [formGroup]="loginForm" class="form-container">
+<form [formGroup]="loginForm" class="form-container">
     <mat-card>
-
 
         <mat-card-header>
             <mat-card-title>Inicia sesión!</mat-card-title>
@@ -36,9 +35,8 @@
         </mat-card-content>
 
         <mat-card-actions>
-            <button mat-raised-button color="primary">Acceder</button>
+            <button mat-raised-button color="primary" (click)="saveForm()" [disabled]="isDisabled">Acceder</button>
         </mat-card-actions>
-
 
     </mat-card>
 </form>

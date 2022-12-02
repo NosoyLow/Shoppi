@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../../../services/user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ROUTEuserCreateProduct, ROUTEuserProducts, ROUTEuserViewProduct, ROUTEuserModifyProduct } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-products',
@@ -12,28 +13,44 @@ export class ProductsComponent {
   productsResponse: any
   productsData: any
 
-  createProductRoute = "user/createProduct"
-  viewProductsRoute = "user/viewProduct/"
-  modifyProductRoute = "user/modifyProduct/"
+  //  Paginación
+  pageNumber: number | undefined;
+  currentPage = 0
+  finalPage = 0
+  disabledFirst = false
+  disabledBack  = false
+  disabledNext  = false
+  disabledEnd   = false
 
-  constructor(private userService: UserService, private router: Router) { 
-    userService.getUserProducts(1).subscribe(
-      res => { this.productsResponse = res.body },
-      err => { console.log(err) },
-      () => { this.productsData = this.productsResponse.data, console.log(this.productsData) }
-    );
+  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) { 
+
+    this.route.queryParams.subscribe( params => {
+      
+      let strPageParams = ""
+      if (params['page'] != undefined){ strPageParams = `page=${params['page']}` }
+      userService.getUserProducts(strPageParams).subscribe(
+        res => { this.productsResponse = res.body },
+        err => {},
+        () => {
+          this.productsData = this.productsResponse.data
+          this.currentPage = this.productsResponse.page
+          this.finalPage = this.productsResponse.total_pages
+          this.checkPaginator()
+        }
+      )
+    } );
   }
 
   createProduct(){
-    this.router.navigate([this.createProductRoute])
+    this.router.navigate([ROUTEuserCreateProduct])
   }
 
   viewProduct(productID: string){
-    this.router.navigate([this.viewProductsRoute, productID])
+    this.router.navigate([ROUTEuserViewProduct, productID])
   }
 
   modifyProduct(productID: string){
-    this.router.navigate([this.modifyProductRoute, productID])
+    this.router.navigate([ROUTEuserModifyProduct, productID])
   }
 
   deleteProduct(productID: string){
@@ -42,6 +59,28 @@ export class ProductsComponent {
       err => { this.reloadCurrentPage() }
     );
   }
+
+  checkPaginator() {
+    if (this.currentPage <= 1){
+      this.disabledFirst = true;
+      this.disabledBack = true;
+    }else{
+      this.disabledFirst = false;
+      this.disabledBack = false;
+    }
+    if (this.currentPage == this.finalPage){
+        this.disabledNext = true;
+        this.disabledEnd = true;
+    }else{
+      this.disabledNext = false;
+      this.disabledEnd = false;
+    }
+  }
+
+  goFirstPage(){ this.router.navigate([ROUTEuserProducts], { queryParams: { page: 1 } }) }
+  goBackPage(){ this.router.navigate([ROUTEuserProducts], { queryParams: { page: this.currentPage - 1 } }) }
+  goNextPage(){ this.router.navigate([ROUTEuserProducts], { queryParams: { page: this.currentPage + 1 } }) }
+  goEndPage(){ this.router.navigate([ROUTEuserProducts], { queryParams: { page: this.finalPage } }) }
 
   reloadCurrentPage() {
     window.location.reload();
