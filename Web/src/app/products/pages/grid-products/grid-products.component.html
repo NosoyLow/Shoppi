@@ -16,7 +16,7 @@
     <mat-drawer-content>
         <app-toolbar></app-toolbar>
         <div>
-            <mat-card (click)="openg()" *ngFor="let product of Products">
+            <mat-card *ngFor="let product of Products" (click)="viewProduct(product.id)">
                 <mat-card-header>
                     <img mat-card-avatar src="{{product.user_image_url}}">
                     <!-- <div mat-card-avatar class="example-header-image"></div> -->

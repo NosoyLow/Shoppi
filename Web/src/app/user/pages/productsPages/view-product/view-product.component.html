@@ -1,4 +1,4 @@
-<mat-drawer-container>
+<mat-drawer-container *ngIf="dataExists">
     <div>
         <mat-card>
             <mat-card-header>
@@ -10,10 +10,10 @@
                 </div>
                 <div class = "user">
                     <img class = "ImgUser" src="{{data.user_image_url}}">
-                    <p class = >{{data.user_name}}</p>
+                    <p>{{data.user_name}}</p>
                 </div>
             </mat-card-header>
         </mat-card>
-        
+        <button mat-button color="primary" (click)="goWhatsapp()">Mandar mensaje a Whatsapp</button>
     </div>
 </mat-drawer-container>

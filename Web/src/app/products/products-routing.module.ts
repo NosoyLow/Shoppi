@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MainComponent } from './pages/main/main.component';
 import { GridProductsComponent } from './pages/grid-products/grid-products.component';
+import { ViewProductComponent } from '../user/pages/productsPages/view-product/view-product.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
       {
         path: 'grid',
         component: GridProductsComponent
+      },
+      {
+        path: 'product/:id',
+        component: ViewProductComponent
       },
       {
         path: '**',

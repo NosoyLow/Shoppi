@@ -9,12 +9,11 @@ import { ProductID } from '../interfaces/productId';
   providedIn: 'root'
 })
 export class UserService {
-
+  //data.forEach((key,value)=>{console.log(key, value)})
   constructor(private http: HttpClient) { }
 
   createProduct(data: FormData, image: any){
     data.append("image", image)
-    //data.forEach((key,value)=>{console.log(key, value)})
     return this.http.post<CreateProductResponse>(`${host}posts/create`, data, {observe: "response", withCredentials: true})
   }
 
@@ -34,4 +33,5 @@ export class UserService {
   deleteUserProduct(postId: string){
     return this.http.delete(`${host}posts/delete`, {body: {"post_id": postId}, observe: "response", withCredentials: true})
   }
+
 }

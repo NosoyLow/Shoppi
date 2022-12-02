@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductsService } from '../../../services/products.service';
-import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-grid-products',
@@ -8,31 +8,19 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./grid-products.component.css']
 })
 export class GridProductsComponent{
-
-  value = "";
-
+  value = ""
   Response: any
   Products : any
+  productIDRouter = "products/product"
 
-  constructor(private productsService: ProductsService, private authService: AuthService) {
-    // this.authService.doAuth().subscribe(
-    //   res => {console.log(res)},
-    //   err => {console.log(err)}
-    // );
-
+  constructor(private productsService: ProductsService, private router: Router) {
     productsService.getProducts().subscribe(resp => {
-      console.log(resp)
       this.Response = resp
       this.Products = resp.data
-     //console.log(this.Products)
      })
   }
 
-  
-
-
-  openg(){
-    console.log("HOla");
-    
+  viewProduct(idProduct: string){
+    this.router.navigate([this.productIDRouter, idProduct])
   }
 }

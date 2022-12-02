@@ -30,7 +30,7 @@ const routes: Routes = [
         component: ModifyProductComponent
       },
       {
-        path: 'account/:id',
+        path: 'account',
         component: AccountComponent
       },
       {

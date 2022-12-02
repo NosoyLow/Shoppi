@@ -11,8 +11,8 @@ export class MainComponent {
 
   gridProductsRoute = ["products/grid"]
   productsAccountRoute = ["user/products"]
-  infoAccount = [""]
-  adminUsers = [""]
+  infoAccountRoute = ["user/account"]
+  adminUsersRoute = [""]
 
   login = ["auth/login"]
   showFiller = true;
@@ -34,6 +34,7 @@ export class MainComponent {
   }
 
   goAccount(){
+    this.router.navigate(this.infoAccountRoute)
   }
 
   goAdmin(){

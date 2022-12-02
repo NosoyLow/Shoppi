@@ -10,15 +10,16 @@ import { UserService } from 'src/app/services/user.service';
 export class ViewProductComponent {
   
   data: any
-
+  dataExists = false
   constructor(private userService: UserService, private route: ActivatedRoute) { 
     this.userService.getUserProduct(this.route.snapshot.paramMap.get('id')!).subscribe(
       res => {this.data = res.data},
-      err => {console.log(err)},
-      () => { console.log(this.data) }
+      err => {},
+      () => {this.dataExists = true}
     )
   }
 
-
-
+  goWhatsapp(){
+    window.open(this.data.whatsapp_url);
+  }
 }
