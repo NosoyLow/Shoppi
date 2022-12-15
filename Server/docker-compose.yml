@@ -1,0 +1,73 @@
+services:
+  auth:
+    container_name: auth 
+    restart: on-failure
+    env_file:
+      - ./Auth/development.env
+    build:
+      context: ./Auth
+    image: shoppiapi.azurecr.io/auth
+    # depends_on:
+    #   - database
+    expose: ["3030"]
+  emailverification:
+    container_name: emailverification
+    restart: on-failure
+    env_file:
+      - ./EmailVerification/development.env
+    build:
+      context: ./EmailVerification
+    image: shoppiapi.azurecr.io/emailverification
+    # depends_on:
+    #   - database
+    expose: ["3010"] 
+  gateway:
+    container_name: gateway
+    restart: on-failure
+    build:
+      context: ./Orquestador
+    image: shoppiapi.azurecr.io/orquestador
+    depends_on:
+      - auth
+      - emailverification
+      - posts
+    ports: ["444:443"]
+  # database:
+  #   container_name: database
+  #   restart: on-failure
+  #   image: mongo:4.4.6
+  #   expose: ["27017"]
+  posts:
+    container_name: posts
+    restart: on-failure
+    env_file:
+      - ./PostsAll/development.env
+    build:
+      context: ./PostsAll
+    # depends_on:
+    #   - database
+    expose: ["3040"]
+  update-user:
+    container_name: update-user
+    restart: on-failure
+    env_file:
+      - ./UpdateUser/development.env
+    depends_on:
+      # - database
+      - emailverification
+    build:
+      context: ./UpdateUser
+    image: shoppiapi.azurecr.io/update-user
+    expose: ["3090"]
+  repetidos:
+    container_name: repetidos
+    restart: on-failure
+    env_file:
+      - ./Repetidos/development.env
+    # depends_on:
+    #   - database
+    build:
+      context: ./Repetidos
+    image: shoppiapi.azurecr.io/repetidos
+    expose: ["3100"]
+    
